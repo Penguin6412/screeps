@@ -1,2 +1,5 @@
 //Manually spawn unit (random name/harvester)
 Game.spawns.E47S3S1.createCreep( [WORK, CARRY, MOVE, MOVE], undefined, {role: 'harvester'})
+
+//show CPU usage
+Game.cpu.getUsed()
