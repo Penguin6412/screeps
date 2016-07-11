@@ -9,17 +9,7 @@ var roleRepairer = {
             creep.memory.repairing = true;
         }
         for(var name in Game.creeps) {
-            if(creep.memory.building) {
-                if(creep.energy < creep.energyCapacity) {
-                    var containers = creep.room.find(FIND_STRUCTURES, { filter: { structureType: STRUCTURE_CONTAINER }});
-                    var repairs = _.filter(Game.creeps, (creep) => (creep.memory.role == 'repairer' && creep.energy < creep.energyCapacity));
-                    if(containers.transfer(repairs[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(containers[0]);
-                    }
-                }
-            }
-
-            else {
+            if(creep.memory.repairing) {
                 var structs = creep.room.find(FIND_STRUCTURES, {
                     filter: object => object.hits < object.hitsMax
                 });
@@ -30,6 +20,13 @@ var roleRepairer = {
                     if(creep.repair(structs[0]) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(structs[0]);
                     }
+                }
+            }
+
+            else {
+            var sources = creep.room.find(FIND_SOURCES);
+            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[0]);
                 }
             }
         }
