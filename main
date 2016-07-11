@@ -16,8 +16,8 @@ module.exports.loop = function () {
     
 //Auto-create harvester creeps if less than X.
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
-    if(harvesters.length < 3) {
-        var newName = Game.spawns.E47S3S1.createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'harvester'});
+    if(harvesters.length <2) {
+        var newName = Game.spawns.E47S3S1.createCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE], undefined, {role: 'harvester'});
         //console.log('Spawning new harvester: ' + newName);
     }
 //Auto-create Builder creeps if less than X.
@@ -28,8 +28,8 @@ module.exports.loop = function () {
     }
 //Auto-create upgrader creeps if less than X.
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
-    if(upgraders.length < 2) {
-        var newName = Game.spawns.E47S3S1.createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'upgrader'});
+    if(upgraders.length < 3) {
+        var newName = Game.spawns.E47S3S1.createCreep([WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE], undefined, {role: 'upgrader'});
         //console.log('Spawning new upgrader: ' + newName);
     }
 //Auto-create repairer creeps if less than X.
