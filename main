@@ -1,6 +1,9 @@
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
+var roleRepairer = require('role.repairer');
+var roleMiner = require('role.miner');
+var roleTransporter = require('role.transporter');
 
 module.exports.loop = function () {
 
@@ -11,9 +14,9 @@ module.exports.loop = function () {
         }
     }
     
-//Auto-create harvester creeps if less than 2.
+//Auto-create harvester creeps if less than 3.
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
-    if(harvesters.length < 2) {
+    if(harvesters.length < 3) {
         var newName = Game.spawns.E47S3S1.createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'harvester'});
         //console.log('Spawning new harvester: ' + newName);
     }
@@ -28,6 +31,24 @@ module.exports.loop = function () {
     if(upgraders.length < 2) {
         var newName = Game.spawns.E47S3S1.createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'upgrader'});
         //console.log('Spawning new upgrader: ' + newName);
+    }
+//Auto-create repairer creeps if less than 1.
+    var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
+    if(repairers.length < 1) {
+        var newName = Game.spawns.E47S3S1.createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'repairer'});
+        //console.log('Spawning new repairer: ' + newName);
+    }
+//Auto-create miner creeps if less than 1.
+    var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner');
+    if(miners.length < 1) {
+        var newName = Game.spawns.E47S3S1.createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'miner'});
+        //console.log('Spawning new miner: ' + newName);
+    }
+//Auto-create transporter creeps if less than 1.
+    var transporters = _.filter(Game.creeps, (creep) => creep.memory.role == 'transporter');
+    if(transporters.length < 1) {
+        var newName = Game.spawns.E47S3S1.createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'transporter'});
+        //console.log('Spawning new transporter: ' + newName);
     }
     
     /* var tower = Game.getObjectById('2279607424504c578afb8592');
@@ -58,6 +79,15 @@ module.exports.loop = function () {
         }
         if(creep.memory.role == 'builder') {
             roleBuilder.run(creep);
+        }
+        if(creep.memory.role == 'repairer') {
+            roleRepairer.run(creep);
+        }
+        if(creep.memory.role == 'miner') {
+            roleMiner.run(creep);
+        }
+        if(creep.memory.role == 'transporter') {
+            roleTransporter.run(creep);
         }
     }
 }
