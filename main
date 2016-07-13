@@ -4,7 +4,6 @@ var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
 var roleMiner = require('role.miner');
 var roleTransporter = require('role.transporter');
-var towertest = Game.spawns.E47S3S1.room.find(STRUCTURE_TOWER);
 
 module.exports.loop = function () {
 
@@ -23,7 +22,7 @@ module.exports.loop = function () {
     }
 //Auto-create repairer creeps if less than X.
     var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
-    if(repairers.length < 3) {
+    if(repairers.length < 2) {
         var newName = Game.spawns.E47S3S1.createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'repairer'});
         //console.log('Spawning new repairer: ' + newName);
     }
@@ -35,7 +34,7 @@ module.exports.loop = function () {
     }
 //Auto-create harvester creeps if less than X.
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
-    if(harvesters.length < 5) {
+    if(harvesters.length < 6) {
         var newName = Game.spawns.E47S3S1.createCreep([WORK,CARRY,MOVE,MOVE], undefined, {role: 'harvester'});
         //console.log('Spawning new harvester: ' + newName);
     }
