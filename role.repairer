@@ -33,4 +33,4 @@ var roleRepairer = {
     }
 };
 
-module.exports = roleRepairer;
+module.exports = roleRepairer
