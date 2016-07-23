@@ -9,13 +9,20 @@ var roleHarvester = {
         }
         else {
             var targets = creep.room.find(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (/*((structure.structureType == STRUCTURE_STORAGE ||
-                                structure.structureType == STRUCTURE_CONTAINER && (_.sum(structure.store) < structure.storeCapacity)) || */
-                                ((structure.structureType == STRUCTURE_SPAWN ||
-                                //structure.structureType == STRUCTURE_TOWER ||
-                                structure.structureType == STRUCTURE_EXTENSION) && (structure.energy < structure.energyCapacity)));
+                filter: (structure) => {
+                    if (structure.structureType == STRUCTURE_SPAWN && (structure.energy < structure.energyCapacity)) {
+                        return (structure.structureType == STRUCTURE_SPAWN);
                     }
+                    else if (structure.structureType == STRUCTURE_EXTENSION && (structure.energy < structure.energyCapacity)) {
+                        return (structure.structureType == STRUCTURE_EXTENSION);
+                    }
+                    else if (structure.structureType == STRUCTURE_TOWER && (structure.energy < structure.energyCapacity)) {
+                        return (structure.structureType == STRUCTURE_TOWER);
+                    }
+                    else if (structure.structureType == STRUCTURE_STORAGE && (structure.store < structure.storeCapacity)) {
+                        return (structure.structureType == STRUCTURE_STORAGE);
+                    }
+                }
             });
             if(targets.length > 0) {
                 if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
